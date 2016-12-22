@@ -22,8 +22,8 @@ class Log {
 	//日志信息
 	protected static $log = [ ];
 
-	public function dir( $dir ) {
-		$this->dir = $dir;
+	public function config( $config ) {
+		$this->dir = $config['dir'];
 		is_dir( $this->dir ) or mkdir( $this->dir, 0755, true );
 	}
 

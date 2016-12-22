@@ -20,10 +20,10 @@ $obj = new \houdunwang\log\Log();
 ```
 
 ####配置
-需要设置日志目录
+以下代码用一设置日志存储目录
 
 ```
-$obj->dir('log');
+$obj->config( [ 'dir' => 'storage' ] );
 ```
 
 ####写入日志
