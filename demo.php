@@ -1,5 +1,6 @@
 <?php
 require 'vendor/autoload.php';
 $obj = new \houdunwang\log\Log();
-$obj->config( [ 'dir' => 'storage' ] );
+\houdunwang\config\Config::set( 'log.dir', 'storage' );
+$obj->init();
 $obj->write( '系统错误', \houdunwang\log\Log::ERROR );

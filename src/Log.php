@@ -9,6 +9,8 @@
  * '-------------------------------------------------------------------*/
 namespace houdunwang\log;
 
+use houdunwang\config\Config;
+
 class Log {
 	const FATAL = 'FATAL';          // 严重错误: 导致系统崩溃无法使用
 	const ERROR = 'ERROR';          // 一般错误: 一般性错误
@@ -22,8 +24,11 @@ class Log {
 	//日志信息
 	protected static $log = [ ];
 
-	public function config( $config ) {
-		$this->dir = $config['dir'];
+	public function __construct() {
+	}
+
+	public function init() {
+		$this->dir = Config::get( 'log.dir' );
 		is_dir( $this->dir ) or mkdir( $this->dir, 0755, true );
 	}
 
