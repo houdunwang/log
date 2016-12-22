@@ -20,7 +20,7 @@ class Log {
 	public $dir;
 
 	//日志信息
-	public $log = [ ];
+	protected static $log = [ ];
 
 	public function dir( $dir ) {
 		$this->dir = $dir;
@@ -34,7 +34,7 @@ class Log {
 	 * @param string $level 级别
 	 */
 	public function record( $message, $level = self::ERROR ) {
-		$this->log[] = date( "[ c ]" ) . "{$level}: {$message}" . PHP_EOL;
+		self::$log[] = date( "[ c ]" ) . "{$level}: {$message}" . PHP_EOL;
 	}
 
 	/**
@@ -43,9 +43,9 @@ class Log {
 	 * @return void
 	 */
 	public function save() {
-		if ( $this->log ) {
+		if ( self::$log ) {
 			$file = $this->dir . '/' . date( 'd' ) . '.log';
-			error_log( implode( "", $this->log ), 3, $file, null );
+			error_log( implode( "", self::$log ), 3, $file, null );
 		}
 	}
 
