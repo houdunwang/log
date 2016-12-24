@@ -2,4 +2,6 @@
 .DS_Store
 /vendor
 storage
+log
 composer.lock
+log/
