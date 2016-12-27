@@ -1,4 +1,7 @@
 <?php
 require 'vendor/autoload.php';
-\houdunwang\log\Log::dir('ab');
+$config = [
+	'dir' => 'log'
+];
+\houdunwang\config\Config::set( 'log', $config );
 \houdunwang\log\Log::write( '系统错误', \houdunwang\log\Log::ERROR );

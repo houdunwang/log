@@ -10,16 +10,16 @@
 namespace houdunwang\log\build;
 
 use houdunwang\config\Config;
+use houdunwang\dir\Dir;
 
 class Base {
 	//日志保存目录
 	protected $dir;
-
 	//日志信息
-	protected static $log = [ ];
+	protected $log = [ ];
 
 	public function __construct() {
-		$this->dir( 'log' );
+		$this->dir( Config::get( 'log.dir' ) );
 	}
 
 	/**
@@ -30,7 +30,7 @@ class Base {
 	 * @return $this
 	 */
 	public function dir( $dir ) {
-		is_dir( $dir ) or mkdir( $dir, 0755, true );
+		Dir::create( $dir );
 		$this->dir = realpath( $dir );
 
 		return $this;
@@ -43,7 +43,7 @@ class Base {
 	 * @param string $level 级别
 	 */
 	public function record( $message, $level = self::ERROR ) {
-		self::$log[] = date( "[ c ]" ) . "{$level}: {$message}" . PHP_EOL;
+		$this->log[] = date( "[ c ]" ) . "{$level}: {$message}" . PHP_EOL;
 	}
 
 	/**
@@ -52,9 +52,9 @@ class Base {
 	 * @return void
 	 */
 	public function save() {
-		if ( self::$log ) {
+		if ( $this->log ) {
 			$file = $this->dir . '/' . date( 'd' ) . '.log';
-			error_log( implode( "", self::$log ), 3, $file, null );
+			error_log( implode( "", $this->log ), 3, $file, null );
 		}
 	}
 

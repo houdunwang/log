@@ -6,18 +6,20 @@
 [TOC]
 #开始使用
 
-####错误级别
 ####安装组件
 使用 composer 命令进行安装或下载源代码使用。
-
 ```
 composer require houdunwang/log
 ```
 > HDPHP 框架已经内置此组件，无需要安装
 
-####设置日志目录
+####配置
 ```
-\houdunwang\log\Log::dir('logs');
+$config = [
+    //日志保存目录
+	'dir' => 'log'
+];
+\houdunwang\config\Config::set( 'log', $config );
 ```
 
 ####写入日志
@@ -40,7 +42,6 @@ const EXCEPTION = 'EXCEPTION';  //异常错误
 
 ####记录日志
 记录日志会在请求结束时自动加入文件中
-
 ```
 \houdunwang\log\Log::record('系统错误',\houdunwang\log\Log::ERROR);
 ```

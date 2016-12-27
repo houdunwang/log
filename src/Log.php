@@ -19,21 +19,28 @@ class Log {
 	const DEBUG = 'DEBUG';          //调试: 调试信息
 	const SQL = 'SQL';              //SQL：SQL语句 注意只在调试模式开启时有效
 	const EXCEPTION = 'EXCEPTION';  //异常错误
+	protected $link;
 
-	protected static function link() {
-		static $link = null;
-		if ( is_null( $link ) ) {
-			$link = new Base();
-		}
+	protected function driver() {
+		$this->link = new Base();
 
-		return $link;
+		return $this;
 	}
 
 	public function __call( $method, $params ) {
-		return call_user_func_array( [ self::link(), $method ], $params );
+		if ( is_null( $this->link ) ) {
+			$this->driver();
+		}
+
+		return call_user_func_array( [ $this->link, $method ], $params );
 	}
 
 	public static function __callStatic( $name, $arguments ) {
-		return call_user_func_array( [ self::link(), $name ], $arguments );
+		static $link;
+		if ( is_null( $link ) ) {
+			$link = new static();
+		}
+
+		return call_user_func_array( [ $link, $name ], $arguments );
 	}
 }
