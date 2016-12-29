@@ -9,9 +9,9 @@
  * '-------------------------------------------------------------------*/
 namespace houdunwang\log;
 
-use hdphp\kernel\ServiceFacade;
+use houdunwang\framework\build\Facade;
 
-class LogFacade extends ServiceFacade {
+class LogFacade extends Facade {
 	public static function getFacadeAccessor() {
 		return 'Log';
 	}

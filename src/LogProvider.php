@@ -9,13 +9,12 @@
  * '-------------------------------------------------------------------*/
 namespace houdunwang\log;
 
-use hdphp\kernel\ServiceProvider;
+use houdunwang\framework\build\Provider;
 
-class LogProvider extends ServiceProvider {
+class LogProvider extends Provider {
 	//延迟加载
 	public $defer = true;
 	public function boot() {
-		\Log::dir( c( 'log.dir' ) );
 	}
 	public function register() {
 		$this->app->single( 'Log', function ( $app ) {
