@@ -82,12 +82,7 @@ class Base
     {
         $file = $this->dir.'/'.date('Y_m_d').'.log';
 
-        return error_log(
-            date("[ c ]")."{$level}: {$message}".PHP_EOL,
-            3,
-            $file,
-            null
-        );
+        return error_log(date("[ c ]")."{$level}: {$message}".PHP_EOL, 3, $file, null);
     }
 
     public function __destruct()
